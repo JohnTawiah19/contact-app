@@ -1,38 +1,69 @@
+@import "~antd/dist/antd.css";
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.contact-header h1 {
+  color: #ffffff;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.add-contact {
+  position: fixed;
+  bottom: 5rem;
+  right: 5rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.btn {
+  height: 100px;
+  width: 100px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  box-shadow: 3px 2px #aaa;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+}
+.page-title {
+  float: left;
+  margin: 1rem 2rem;
 }
 
-.App-link {
-  color: #61dafb;
+.list {
+  display: block;
+  margin: 70px;
+}
+.contact-list {
+  margin-top: 15px;
+  width: 30%;
+  min-width: 30%;
+  box-shadow: 0 0 5px #aaa;
+  border-radius: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.contact-list ul {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.contact-list:hover {
+  cursor: pointer;
+  box-shadow: 0 0 10px #409aff;
+}
+
+li {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+.ant-card-body {
+  padding: 5px;
+}
+svg {
+  height: 50px;
+  width: 50px;
+  color: #40a9ff;
 }
