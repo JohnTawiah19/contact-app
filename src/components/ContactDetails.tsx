@@ -13,12 +13,12 @@ interface DetailProps {
 
 class ContactDetails extends Component<DetailProps> {
   state = {
-    visible: true,
+    visible: this.props.visible,
   };
 
   render() {
     const { firstName, lastName, handle } = this.props.contact;
-    console.log(this.state.visible, this.props.visible, firstName);
+    console.log(this.state.visible, this.props.visible);
     return (
       <div>
         {this.state.visible && (

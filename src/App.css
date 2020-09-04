@@ -31,6 +31,9 @@
 .contact-details {
   margin: 1rem 2rem;
 }
+.new-contact {
+  margin: 1rem 2rem;
+}
 .contact-list {
   box-shadow: 0 0 5px #aaa;
   border-radius: 5px;

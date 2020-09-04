@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Button, Layout, Card } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { Layout, Card } from "antd";
 import ContactDetails from "./ContactDetails";
+import AddContact from "./AddContact";
 
 class ViewContacts extends Component {
   state = {
@@ -19,7 +19,10 @@ class ViewContacts extends Component {
     const details = this.state.contacts.find((list) => {
       return list.id === +itemId;
     });
-    this.setState({ details, modalState: true });
+    this.setState({ details });
+    !this.state.modalState
+      ? this.setState({ modalState: true })
+      : this.setState({ modalState: false });
   };
 
   render() {
@@ -54,11 +57,9 @@ class ViewContacts extends Component {
               visible={this.state.modalState}
             />
           </div>
-        </div>
-        <div className="add-contact">
-          <Button className="btn">
-            <PlusOutlined className="plus" />
-          </Button>
+          <div className="new-contact">
+            <AddContact />
+          </div>
         </div>
       </div>
     );
