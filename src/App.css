@@ -1,17 +1,14 @@
 @import "~antd/dist/antd.css";
 
-.App {
-  text-align: center;
-}
-
 .contact-header h1 {
   color: #ffffff;
+  text-align: center;
 }
 
 .add-contact {
   position: fixed;
   bottom: 5rem;
-  right: 5rem;
+  right: 3rem;
 }
 
 .btn {
@@ -25,28 +22,18 @@
   padding: 0;
   margin: 0;
 }
-.page-title {
-  float: left;
+
+.list-container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+.contact-details {
   margin: 1rem 2rem;
 }
-
-.list {
-  display: block;
-  margin: 70px;
-}
 .contact-list {
-  margin-top: 15px;
-  width: 30%;
-  min-width: 30%;
   box-shadow: 0 0 5px #aaa;
   border-radius: 5px;
-}
-
-.contact-list ul {
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
 }
 
 .contact-list:hover {
@@ -54,13 +41,20 @@
   box-shadow: 0 0 10px #409aff;
 }
 
+.contact {
+  text-align: center;
+}
+ul {
+  margin-right: 0;
+  width: 300px;
+}
+
 li {
   list-style: none;
-  display: flex;
-  justify-content: center;
+  margin: 1rem 0;
 }
 .ant-card-body {
-  padding: 5px;
+  padding: 15px;
 }
 svg {
   height: 50px;
