@@ -7,8 +7,12 @@ class AddContact extends Component {
     contactForm: {
       firstName: "",
       lastName: "",
-      email: "",
-      phone: "",
+      email1: "",
+      email2: "",
+      email3: "",
+      phone1: "",
+      phone2: "",
+      phone3: "",
       handle: "",
     },
     showAddContact: false,
@@ -30,9 +34,32 @@ class AddContact extends Component {
     const newContact = {
       firstName: this.state.contactForm.firstName,
       lastName: this.state.contactForm.lastName,
-      email: this.state.contactForm.email,
-      phone: this.state.contactForm.phone,
+      email1: this.state.contactForm.email1,
+      email2: this.state.contactForm.email2,
+      email3: this.state.contactForm.email3,
+      phone1: this.state.contactForm.phone1,
+      phone2: this.state.contactForm.phone2,
+      phone3: this.state.contactForm.phone3,
       handle: this.state.contactForm.handle,
+    };
+  };
+
+  //Graphql mutation
+
+  addContact = () => {
+    const requestBody = {
+      query: `mutation MyMutation {
+        insert_Contacts_one(object: {
+          firstName: "", lastName: "", 
+          phone1: "", phone2: "", phone3: "",
+          handle: "", 
+          email1: "", email2: "", email3: ""
+        }) {
+          firstName
+          lastName
+        }
+      }
+      `,
     };
   };
 
@@ -83,17 +110,20 @@ class AddContact extends Component {
                 <Input onChange={this.handleInput} name="lastName" />
               </Form.Item>
               <Form.Item
-                label="Email"
-                name="email"
+                label="Email1"
+                name="email1"
                 rules={[
                   { required: true, message: "Please input your email!" },
                 ]}
               >
-                <Input onChange={this.handleInput} name="email" />
+                <Input onChange={this.handleInput} name="email1" />
+              </Form.Item>
+              <Form.Item label="Email2" name="email2">
+                <Input onChange={this.handleInput} name="email2" />
               </Form.Item>
               <Form.Item
-                label="Phone"
-                name="phone"
+                label="Phone1"
+                name="phone1"
                 rules={[
                   {
                     required: true,
@@ -101,7 +131,10 @@ class AddContact extends Component {
                   },
                 ]}
               >
-                <Input onChange={this.handleInput} name="phone" />
+                <Input onChange={this.handleInput} name="phone1" />
+              </Form.Item>
+              <Form.Item label="Phone2" name="phone2">
+                <Input onChange={this.handleInput} name="phone2" />
               </Form.Item>
               <Form.Item
                 label="Twitter"
@@ -115,7 +148,6 @@ class AddContact extends Component {
               >
                 <Input onChange={this.handleInput} name="handle" />
               </Form.Item>
-
               <Form.Item {...tailLayout}>
                 <Button type="primary" htmlType="submit">
                   Submit
