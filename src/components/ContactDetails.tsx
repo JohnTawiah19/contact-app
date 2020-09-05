@@ -6,23 +6,31 @@ interface DetailProps {
     id: number;
     firstName: string;
     lastName: string;
+    phone1: string;
+    phone2: string;
+    email1: string;
+    email2: string;
     handle: string;
   };
   visible: boolean;
 }
 
 class ContactDetails extends Component<DetailProps> {
-  state = {
-    visible: this.props.visible,
-  };
-
   render() {
-    const { firstName, lastName, handle } = this.props.contact;
-    console.log(this.state.visible, this.props.visible);
+    const {
+      firstName,
+      lastName,
+      handle,
+      email1,
+      email2,
+      phone1,
+      phone2,
+    } = this.props.contact;
+    // console.log(this.state.visible, this.props.visible);
     return (
       <div>
-        {this.state.visible && (
-          <div>
+        {this.props.visible && (
+          <div className="details">
             <Card
               size="small"
               title="Contact Details"
@@ -32,9 +40,17 @@ class ContactDetails extends Component<DetailProps> {
               <p>
                 Name: {firstName} {lastName}
               </p>
-              <p>Handle: {handle}</p>
-              <p>Email: </p>
-              <p>Phone: </p>
+              <p>
+                Handle:{" "}
+                <a href={`https://www.twitter.com/${handle}`}> {handle}</a>
+              </p>
+              <p>Email 1 : {email1}</p>
+              <p>
+                Email 2: {"  "}
+                {email2 ? email2 : "N/A"}
+              </p>
+              <p>Phone 1: {phone1} </p>
+              <p>Phone 2: {phone2 ? phone2 : "N/A"}</p>
             </Card>
           </div>
         )}

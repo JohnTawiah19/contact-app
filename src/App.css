@@ -47,6 +47,10 @@
 .contact {
   text-align: center;
 }
+
+/* .details {
+  position: fixed;
+} */
 ul {
   margin-right: 0;
   width: 300px;
