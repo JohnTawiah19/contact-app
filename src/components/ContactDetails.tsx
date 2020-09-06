@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Card } from "antd";
+import DeleteContact from "./DeleteContact";
 
 interface DetailProps {
   contact: {
@@ -18,6 +19,7 @@ interface DetailProps {
 class ContactDetails extends Component<DetailProps> {
   render() {
     const {
+      id,
       firstName,
       lastName,
       handle,
@@ -50,6 +52,9 @@ class ContactDetails extends Component<DetailProps> {
               </p>
               <p>Phone 1: {phone1} </p>
               <p>Phone 2: {phone2 ? phone2 : "N/A"}</p>
+              <div className="delete-contact">
+                <DeleteContact updateid={id} />
+              </div>
             </Card>
           </div>
         )}
