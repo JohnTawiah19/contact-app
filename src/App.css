@@ -71,3 +71,13 @@ svg {
   width: 50px;
   color: #40a9ff;
 }
+
+.ant-modal-close-icon > svg {
+  color: #999;
+  height: 20px;
+  width: 20px;
+}
+
+.ant-modal-close-icon > svg:hover {
+  color: #222;
+}
