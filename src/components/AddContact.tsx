@@ -4,24 +4,15 @@ import { PlusOutlined } from "@ant-design/icons";
 
 class AddContact extends Component {
   state = {
-    contactForm: {
-      firstName: "",
-      lastName: "",
-      email1: "",
-      email2: "",
-      email3: "",
-      phone1: "",
-      phone2: "",
-      phone3: "",
-      handle: "",
-    },
+    firstName: "",
+    lastName: "",
+    email1: "",
+    email2: "",
+    phone1: "",
+    phone2: "",
+    handle: "",
     showAddContact: false,
-  };
-  showForm = () => {
-    this.setState({
-      showAddContact: !this.state.showAddContact ? true : false,
-    });
-    console.log(this.state.showAddContact);
+    error: "",
   };
 
   handleInput = (e: any) => {
@@ -29,38 +20,80 @@ class AddContact extends Component {
     console.log(this.state);
   };
 
-  submitform = (e: any) => {
-    e.preventDefault();
-    const newContact = {
-      firstName: this.state.contactForm.firstName,
-      lastName: this.state.contactForm.lastName,
-      email1: this.state.contactForm.email1,
-      email2: this.state.contactForm.email2,
-      email3: this.state.contactForm.email3,
-      phone1: this.state.contactForm.phone1,
-      phone2: this.state.contactForm.phone2,
-      phone3: this.state.contactForm.phone3,
-      handle: this.state.contactForm.handle,
-    };
+  showForm = () => {
+    this.setState({
+      showAddContact: !this.state.showAddContact ? true : false,
+    });
   };
+  submitForm = () => {
+    const {
+      firstName,
+      lastName,
+      phone1,
+      phone2,
+      email1,
+      email2,
+      handle,
+    } = this.state;
 
-  //Graphql mutation
-
-  addContact = () => {
-    const requestBody = {
+    if (firstName === "" || undefined) {
+      alert("Please enter the first name");
+      return;
+    }
+    if (lastName === "" || undefined) {
+      alert("Please enter the last name");
+      return;
+    }
+    if (handle === "" || undefined) {
+      alert("Please enter the twitter handle");
+      return;
+    }
+    if (phone1 === "" || undefined) {
+      alert("Please enter the phone number");
+      return;
+    }
+    if (phone1.length < 10) {
+      alert("Phone number should be at least 10 digits");
+      return;
+    }
+    if (email1 === "" || undefined) {
+      alert("Please enter the email");
+      return;
+    }
+    const query = JSON.stringify({
       query: `mutation MyMutation {
-        insert_Contacts_one(object: {
-          firstName: "", lastName: "", 
-          phone1: "", phone2: "", phone3: "",
-          handle: "", 
-          email1: "", email2: "", email3: ""
-        }) {
+        insert_Contacts_one(object:
+           {firstName: "${firstName}",
+           lastName: "${lastName}",
+           email1: "${email1}", 
+           email2: "${email2 ? email2 : null}", 
+           phone1: "${phone1}",
+           phone2: "${phone2 ? email2 : null}", 
+           handle: "${handle}"
+          }) {
           firstName
-          lastName
         }
       }
       `,
-    };
+    });
+    console.log(this.state.handle);
+    fetch("https://great-fawn-85.hasura.app/v1/graphql", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: query,
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Fetch failed");
+        }
+        return res.json();
+      })
+      .then((resData) => {
+        console.log(resData.data);
+      });
+    this.setState({ showAddContact: false });
   };
 
   render() {
@@ -149,7 +182,11 @@ class AddContact extends Component {
                 <Input onChange={this.handleInput} name="handle" />
               </Form.Item>
               <Form.Item {...tailLayout}>
-                <Button type="primary" htmlType="submit">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  onClick={this.submitForm}
+                >
                   Submit
                 </Button>
               </Form.Item>

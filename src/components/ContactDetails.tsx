@@ -26,7 +26,6 @@ class ContactDetails extends Component<DetailProps> {
       phone1,
       phone2,
     } = this.props.contact;
-    // console.log(this.state.visible, this.props.visible);
     return (
       <div>
         {this.props.visible && (
@@ -47,7 +46,7 @@ class ContactDetails extends Component<DetailProps> {
               <p>Email 1 : {email1}</p>
               <p>
                 Email 2: {"  "}
-                {email2 ? email2 : "N/A"}
+                {email2 || email2 === "" ? email2 : "N/A"}
               </p>
               <p>Phone 1: {phone1} </p>
               <p>Phone 2: {phone2 ? phone2 : "N/A"}</p>
