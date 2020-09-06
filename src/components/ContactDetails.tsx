@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Card } from "antd";
 import DeleteContact from "./DeleteContact";
+import UpdateContact from "./UpdateContact";
 
 interface DetailProps {
   contact: {
@@ -54,6 +55,9 @@ class ContactDetails extends Component<DetailProps> {
               <p>Phone 2: {phone2 ? phone2 : "N/A"}</p>
               <div className="delete-contact">
                 <DeleteContact updateid={id} />
+              </div>
+              <div className="update-contact">
+                <UpdateContact updateid={id} />
               </div>
             </Card>
           </div>

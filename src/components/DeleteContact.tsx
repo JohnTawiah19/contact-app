@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "antd";
+import { Button, Alert } from "antd";
 
 interface Update {
   updateid: number;
@@ -29,8 +29,11 @@ const deleteContact = (updateid: number) => {
     })
     .then((resData) => {
       console.log(resData);
-      alert(
-        `${resData.data.delete_Contacts_by_pk.firstName} was deleted from contact list`
+      return (
+        <Alert
+          message={`${resData.data.delete_Contacts_by_pk.firstName} has been removed from contacts`}
+          type="success"
+        ></Alert>
       );
     });
 };
