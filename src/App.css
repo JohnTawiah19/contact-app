@@ -63,6 +63,9 @@ li {
 .ant-card-body {
   padding: 15px;
 }
+.delete-contact {
+  float: right;
+}
 svg {
   height: 50px;
   width: 50px;
