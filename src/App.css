@@ -79,7 +79,7 @@ svg {
   color: #222;
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 360px) {
   .list-container {
     display: flex;
     flex-wrap: wrap;

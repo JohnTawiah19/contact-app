@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Layout, Card } from "antd";
 import ContactDetails from "./ContactDetails";
 import AddContact from "./AddContact";
-// import { gql, useQuery } from "@apollo/client";
 
 class ViewContacts extends Component {
   state = {
