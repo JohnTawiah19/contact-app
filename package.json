@@ -23,14 +23,16 @@
     "react-modal": "^3.11.2",
     "react-reveal": "^1.2.2",
     "react-scripts": "3.4.3",
+    "serve": "^11.3.2",
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "nodemon server.js"
+    "heroku-postbuild": "npm run build",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
