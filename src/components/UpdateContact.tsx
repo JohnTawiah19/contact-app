@@ -3,6 +3,15 @@ import { Button, Modal, Form, Input } from "antd";
 
 interface Update {
   updateid: number;
+  contactDetails: {
+    firstName: string;
+    lastName: string;
+    email1: string;
+    email2: string;
+    phone1: string;
+    phone2: string;
+    handle: string;
+  };
 }
 class UpdateContact extends Component<Update> {
   state = {
@@ -40,7 +49,7 @@ class UpdateContact extends Component<Update> {
 
   // Update contact with new data
   updateContact = () => {
-    const {
+    let {
       firstName,
       lastName,
       phone1,
@@ -49,6 +58,39 @@ class UpdateContact extends Component<Update> {
       email2,
       handle,
     } = this.state;
+
+    firstName =
+      firstName === "" || undefined || null
+        ? this.props.contactDetails.firstName
+        : firstName;
+
+    lastName =
+      lastName === "" || undefined || null
+        ? this.props.contactDetails.lastName
+        : lastName;
+
+    phone1 =
+      phone1 === "" || undefined || null
+        ? this.props.contactDetails.phone1
+        : phone1;
+
+    phone2 =
+      phone2 === "" || undefined || null
+        ? this.props.contactDetails.phone2
+        : phone2;
+
+    email1 =
+      email1 === "" || undefined || null
+        ? this.props.contactDetails.email1
+        : email1;
+    email2 =
+      email2 === "" || undefined || null
+        ? this.props.contactDetails.email2
+        : email2;
+    handle =
+      handle === "" || undefined || null
+        ? this.props.contactDetails.handle
+        : handle;
 
     const query = JSON.stringify({
       query: `mutation MyMutation {
@@ -74,6 +116,9 @@ class UpdateContact extends Component<Update> {
       body: query,
     })
       .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Fetch failed");
+        }
         return res.json();
       })
       .then((resData) => {
@@ -88,9 +133,9 @@ class UpdateContact extends Component<Update> {
       labelCol: { span: 8 },
       wrapperCol: { span: 16 },
     };
-    const tailLayout = {
-      wrapperCol: { offset: 8, span: 16 },
-    };
+    // const tailLayout = {
+    //   wrapperCol: { offset: 8, span: 16 },
+    // };
 
     const onFinish = (values: any) => {
       console.log("Success:", values);
@@ -131,60 +176,60 @@ class UpdateContact extends Component<Update> {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
           >
-            <Form.Item
-              label="First name"
-              name="firstName"
-              rules={[
-                { required: true, message: "Please input your first name!" },
-              ]}
-            >
-              <Input onChange={this.handleInput} name="firstName" />
+            <Form.Item label="First name" name="firstName">
+              <Input
+                onChange={this.handleInput}
+                name="firstName"
+                placeholder={this.props.contactDetails.firstName}
+              />
             </Form.Item>
-            <Form.Item
-              label="Last name"
-              name="lastName"
-              rules={[
-                { required: true, message: "Please input your last name!" },
-              ]}
-            >
-              <Input onChange={this.handleInput} name="lastName" />
+
+            <Form.Item label="Last name" name="lastName">
+              <Input
+                onChange={this.handleInput}
+                name="lastName"
+                placeholder={this.props.contactDetails.lastName}
+              />
             </Form.Item>
-            <Form.Item
-              label="Email1"
-              name="email1"
-              rules={[{ required: true, message: "Please input your email!" }]}
-            >
-              <Input onChange={this.handleInput} name="email1" />
+
+            <Form.Item label="Email1" name="email1">
+              <Input
+                onChange={this.handleInput}
+                name="email1"
+                placeholder={this.props.contactDetails.email1}
+              />
             </Form.Item>
+
             <Form.Item label="Email2" name="email2">
-              <Input onChange={this.handleInput} name="email2" />
+              <Input
+                onChange={this.handleInput}
+                name="email2"
+                placeholder={this.props.contactDetails.email2}
+              />
             </Form.Item>
-            <Form.Item
-              label="Phone1"
-              name="phone1"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your phone number!",
-                },
-              ]}
-            >
-              <Input onChange={this.handleInput} name="phone1" />
+
+            <Form.Item label="Phone1" name="phone1">
+              <Input
+                onChange={this.handleInput}
+                name="phone1"
+                placeholder={this.props.contactDetails.phone1}
+              />
             </Form.Item>
+
             <Form.Item label="Phone2" name="phone2">
-              <Input onChange={this.handleInput} name="phone2" />
+              <Input
+                onChange={this.handleInput}
+                name="phone2"
+                placeholder={this.props.contactDetails.phone2}
+              />
             </Form.Item>
-            <Form.Item
-              label="Twitter"
-              name="handle"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your Twitter handle!",
-                },
-              ]}
-            >
-              <Input onChange={this.handleInput} name="handle" />
+
+            <Form.Item label="Twitter" name="handle">
+              <Input
+                onChange={this.handleInput}
+                name="handle"
+                placeholder={this.props.contactDetails.handle}
+              />
             </Form.Item>
           </Form>
         </Modal>

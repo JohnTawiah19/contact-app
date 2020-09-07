@@ -29,6 +29,8 @@ class ContactDetails extends Component<DetailProps> {
       phone1,
       phone2,
     } = this.props.contact;
+
+    // this.fetchHandle(handle);
     return (
       <div>
         {this.props.visible && (
@@ -57,7 +59,18 @@ class ContactDetails extends Component<DetailProps> {
                 <DeleteContact updateid={id} />
               </div>
               <div className="update-contact">
-                <UpdateContact updateid={id} />
+                <UpdateContact
+                  updateid={id}
+                  contactDetails={{
+                    firstName,
+                    lastName,
+                    email1,
+                    email2,
+                    phone1,
+                    phone2,
+                    handle,
+                  }}
+                />
               </div>
             </Card>
           </div>

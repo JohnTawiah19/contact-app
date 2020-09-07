@@ -6,12 +6,6 @@ import AddContact from "./AddContact";
 
 class ViewContacts extends Component {
   state = {
-    contacts: [
-      { id: "1", firstName: "John", lastName: "Tawiah", handle: "@john" },
-      { id: "2", firstName: "Michael", lastName: "Blankson", handle: "@blank" },
-      { id: "3", firstName: "David", lastName: "Adams", handle: "@david" },
-    ],
-
     Contacts: [{ id: "", firstName: "", lastName: "", email1: "", phone1: "" }],
     details: {
       id: 1,
@@ -46,7 +40,7 @@ class ViewContacts extends Component {
     const requestBody = {
       query: `
       query MyQuery {
-        Contacts {
+        Contacts (order_by: {firstName: asc}) {
           id
           firstName
           lastName
@@ -85,6 +79,7 @@ class ViewContacts extends Component {
 
   render() {
     const { Header } = Layout;
+    console.log(this.state.details.handle);
 
     const list = this.state.Contacts.map((item, index: number) => {
       return (
@@ -97,7 +92,6 @@ class ViewContacts extends Component {
         </li>
       );
     });
-    console.log(this.state.Contacts);
 
     return (
       <div>
