@@ -48,9 +48,6 @@
   text-align: center;
 }
 
-/* .details {
-  position: fixed;
-} */
 ul {
   margin-right: 0;
   width: 300px;
@@ -80,4 +77,11 @@ svg {
 
 .ant-modal-close-icon > svg:hover {
   color: #222;
+}
+
+@media screen and (min-width: 480px) {
+  .list-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
