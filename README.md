@@ -1,13 +1,13 @@
-### React Contact App scripted with typescript
+## React Contact App scripted with typescript
 
 The app allows a user to create, update and delete a contact from the app using
 a the hasura framework as the api
 
-# To get access to the api, follow the link below
+### To get access to the api, follow the link below
 
 [Hasura Grapql API](https://great-fawn-85.hasura.app/v1/graphql)
 
-# A custom resolver was attached to the graphql schema for fetching the twitter handle
+### A custom resolver was attached to the graphql schema for fetching the twitter handle
 
 [Custom Resolver Endpoint Hosted on Glitch](https://aboard-typical-root.glitch.me/)
 Also to view the repository for the endpoint :
