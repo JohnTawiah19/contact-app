@@ -2,6 +2,7 @@
 
 The app allows a user to create, update and delete a contact from the app using
 a the hasura framework as the api
+### [Live version of the app](https://whispering-fjord-77503.herokuapp.com/)
 
 ### To get access to the api, follow the link below
 
