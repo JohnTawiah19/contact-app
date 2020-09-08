@@ -3,7 +3,7 @@
 The app allows a user to create, update and delete a contact from the app using
 a the hasura framework as the api
 
-# To get access to the api, follor the link below
+# To get access to the api, follow the link below
 
 [Hasura Grapql API](https://great-fawn-85.hasura.app/v1/graphql)
 
