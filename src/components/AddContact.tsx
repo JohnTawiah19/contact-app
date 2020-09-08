@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { Button, Input, Form } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
-class AddContact extends Component {
+interface ViewProps {
+  fetch: any;
+}
+class AddContact extends Component<ViewProps> {
   state = {
     firstName: "",
     lastName: "",
@@ -26,7 +29,7 @@ class AddContact extends Component {
     });
   };
   submitForm = () => {
-    const {
+    let {
       firstName,
       lastName,
       phone1,
@@ -56,6 +59,11 @@ class AddContact extends Component {
       alert("Phone number should be at least 10 digits");
       return;
     }
+
+    if (phone2.length < 10 && phone2 !== "") {
+      alert("Phone number should be at least 10 digits");
+      return;
+    }
     if (email1 === "" || undefined) {
       alert("Please enter the email");
       return;
@@ -66,9 +74,9 @@ class AddContact extends Component {
            {firstName: "${firstName}",
            lastName: "${lastName}",
            email1: "${email1}", 
-           email2: "${email2 ? email2 : null}", 
+           email2: "${email2}", 
            phone1: "${phone1}",
-           phone2: "${phone2 ? email2 : null}", 
+           phone2: "${phone2}", 
            handle: "${handle}"
           }) {
           firstName
@@ -94,6 +102,9 @@ class AddContact extends Component {
         console.log(resData.data);
       });
     this.setState({ showAddContact: false });
+    setTimeout(() => {
+      this.props.fetch();
+    }, 2000);
   };
 
   render() {

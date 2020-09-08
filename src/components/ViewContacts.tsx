@@ -19,6 +19,7 @@ class ViewContacts extends Component {
     modalState: false,
     loading: false,
     error: "",
+    isDeleted: false,
   };
 
   handleClick = (e: any) => {
@@ -26,7 +27,16 @@ class ViewContacts extends Component {
     const details = this.state.Contacts.find((list) => {
       return list.id === itemId;
     });
-    this.setState({ details });
+    this.setState({
+      details: details,
+    });
+    setTimeout(() => {
+      this.openModal();
+    }, 1);
+  };
+
+  //Open details
+  openModal = () => {
     !this.state.modalState
       ? this.setState({ modalState: true })
       : this.setState({ modalState: false });
@@ -45,6 +55,8 @@ class ViewContacts extends Component {
           lastName
           email1
           phone1
+          email2
+          phone2
           handle
         }
       }      
@@ -67,19 +79,55 @@ class ViewContacts extends Component {
       .then((resData) => {
         this.setState({
           Contacts: resData.data.Contacts,
+          loading: false,
         });
         // console.log(resData);
       });
   };
 
+  //Delete contact
+
+  deleteContact = (updateid: number) => {
+    const query = JSON.stringify({
+      query: `mutation MyMutation {
+        delete_Contacts_by_pk(id: "${updateid}") {
+          firstName
+        }
+      }`,
+    });
+
+    fetch("https://great-fawn-85.hasura.app/v1/graphql", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: query,
+    })
+      .then((res) => {
+        if (res.status !== 200 && res.status !== 201) {
+          throw new Error("Fetch failed");
+        }
+        console.log(res);
+        return res.json();
+      })
+      .then((resData) => {
+        console.log(resData);
+      });
+    this.setState({
+      isDeleted: !this.state.isDeleted,
+    });
+    setTimeout(() => {
+      this.fetchContacts();
+    }, 2000);
+  };
+
   componentDidMount() {
     this.fetchContacts();
+    console.log("object");
   }
 
   render() {
     const { Header } = Layout;
-    console.log(this.state.details.handle);
-
     const list = this.state.Contacts.map((item, index: number) => {
       return (
         <li key={index}>
@@ -91,22 +139,24 @@ class ViewContacts extends Component {
         </li>
       );
     });
-
+    // console.log(this.state.details);
     return (
       <div>
         <Header className="contact-header">
           <h1>Contact app</h1>
         </Header>
         <div className="list-container">
-          <ul> {list}</ul>
+          {this.state.loading ? "Loading...." : <ul> {list}</ul>}
           <div className="contact-details">
             <ContactDetails
               contact={this.state.details}
               visible={this.state.modalState}
+              deleteContact={this.deleteContact}
+              fetch={this.fetchContacts}
             />
           </div>
           <div className="new-contact">
-            <AddContact />
+            <AddContact fetch={this.fetchContacts} />
           </div>
         </div>
       </div>

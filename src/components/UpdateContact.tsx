@@ -12,6 +12,8 @@ interface Update {
     phone2: string;
     handle: string;
   };
+  fetch: any;
+  visible: boolean;
 }
 class UpdateContact extends Component<Update> {
   state = {
@@ -37,6 +39,9 @@ class UpdateContact extends Component<Update> {
     setTimeout(() => {
       this.setState({ loading: false, visible: false });
     }, 3000);
+    setTimeout(() => {
+      this.props.fetch();
+    }, 2000);
   };
 
   handleCancel = () => {
@@ -126,6 +131,7 @@ class UpdateContact extends Component<Update> {
       });
     this.handleOk();
   };
+
   render() {
     const { visible, loading } = this.state;
 
